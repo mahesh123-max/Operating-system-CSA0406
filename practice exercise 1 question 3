@@ -1,0 +1,16 @@
+#include <stdio.h>
+#define MAX 5
+
+int q[MAX], f = -1, r = -1;
+
+void enq(int p){ if(r<MAX-1){ if(f==-1) f=0; q[++r]=p; } }
+void deq(){ if(f<=r) printf("Running: P%d\n", q[f++]); }
+void show(){ for(int i=f;i<=r;i++) printf("P%d ", q[i]); printf("\n"); }
+
+int main() {
+    enq(1); enq(2); enq(3);
+    show();
+    deq();
+    show();
+    return 0;
+}
