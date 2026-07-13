@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+int main() {
+    int bt[] = {5, 3, 8}, wt[3], n = 3, sum = 0;
+
+    wt[0] = 0;
+    for (int i = 1; i < n; i++)
+        wt[i] = wt[i - 1] + bt[i - 1];
+
+    for (int i = 0; i < n; i++)
+        sum += wt[i];
+
+    printf("Average Waiting Time = %.2f\n", (float)sum / n);
+    return 0;
+}
