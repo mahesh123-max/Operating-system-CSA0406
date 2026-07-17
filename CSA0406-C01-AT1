@@ -1,0 +1,92 @@
+
+B.Mahesh Kumar Reddy(192572111)
+
+Question 1
+(a) Type of OS: Multi-user Operating System (with multitasking)
+Justification: It allows multiple users to run programs simultaneously.
+
+(b)1. Process scheduling – allocates CPU time to processes.
+2.Memory management – allocates and protects memory for each process.
+
+(c) C system call sequence:
+START
+pid ← fork()
+IF pid = 0 THEN
+    PRINT "Child Process ID:", getpid()
+ELSE
+    PRINT "Parent Process ID:", getpid()
+    PRINT "Child Process ID:", pid
+END IF
+STOP
+
+Question 2
+(a) 1. creat() / open() – Create a file.
+2.write() – Write data.
+3.read() – Read data.
+4.close() – Close the file.
+
+(b) 1.open() – Opens or creates a file and returns a file descriptor.
+2.close() – Closes the file and releases system resources.
+
+(c) C system call sequence:
+START
+fd ← create("student.txt")
+WRITE "John" to fd
+CLOSE fd
+STOP
+
+Question 3
+(a) System calls:
+1.open()
+2.read()
+3.write()
+4.close()
+
+(b) 1.write() – Write data to the source file.
+2.read() – Reading data from the source file.
+
+(c) C system call sequence:
+START
+src ← open("source.txt", READ)
+dest ← open("dest.txt", CREATE/WRITE)
+WHILE read(src, buffer) > 0
+    write(dest, buffer)
+END WHILE
+close(src)
+close(dest)
+STOP
+
+Question 4
+(a) 1.fork() – Creates a new child process.
+2.exec() – Replaces the child process with a new program.
+
+(b) wait() makes the parent process wait until the child process finishes.
+
+(c) C system call sequence:
+START
+pid ← fork()
+IF pid = 0 THEN
+    exec("program")
+ELSE
+    wait()
+END IF
+STOP
+
+Question 5
+(a) Importance of file management:Organizes, stores, retrieves, and protects files efficiently.
+
+(b) 1.open() – Opens a file and returns a file descriptor.
+2.close() – Closes the file and releases system resources.
+
+(c) C system call sequence:
+START
+Open file "sample.txt" in read mode
+IF file opens successfully THEN
+    Read data from file
+    Display/read the contents
+    Close the file
+ELSE
+    Display "Error opening file"
+END IF
+STOP
+STOP
