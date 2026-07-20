@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+int main()
+{
+    int fd, bytes;
+    char buffer[100];
+
+    fd = open("student.txt", O_RDONLY);
+
+    if (fd < 0)
+    {
+        printf("File not found.\n");
+        return 1;
+    }
+
+    bytes = read(fd, buffer, sizeof(buffer) - 1);
+    buffer[bytes] = '\0';
+
+    printf("File Contents:\n%s", buffer);
+
+    close(fd);
+
+    return 0;
+}
