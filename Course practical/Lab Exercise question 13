@@ -1,0 +1,128 @@
+#include <stdio.h>
+
+void firstFit(int blocks[], int b, int processes[], int p)
+{
+    int allocation[p];
+
+    for (int i = 0; i < p; i++)
+        allocation[i] = -1;
+
+    for (int i = 0; i < p; i++) {
+        for (int j = 0; j < b; j++) {
+            if (blocks[j] >= processes[i]) {
+                allocation[i] = j;
+                blocks[j] -= processes[i];
+                break;
+            }
+        }
+    }
+
+    printf("\nFirst Fit:\n");
+    for (int i = 0; i < p; i++) {
+        if (allocation[i] != -1)
+            printf("Process %d -> Block %d\n", i + 1, allocation[i] + 1);
+        else
+            printf("Process %d -> Not Allocated\n", i + 1);
+    }
+}
+
+void bestFit(int blocks[], int b, int processes[], int p)
+{
+    int allocation[p];
+
+    for (int i = 0; i < p; i++)
+        allocation[i] = -1;
+
+    for (int i = 0; i < p; i++) {
+        int best = -1;
+
+        for (int j = 0; j < b; j++) {
+            if (blocks[j] >= processes[i]) {
+                if (best == -1 || blocks[j] < blocks[best])
+                    best = j;
+            }
+        }
+
+        if (best != -1) {
+            allocation[i] = best;
+            blocks[best] -= processes[i];
+        }
+    }
+
+    printf("\nBest Fit:\n");
+    for (int i = 0; i < p; i++) {
+        if (allocation[i] != -1)
+            printf("Process %d -> Block %d\n", i + 1, allocation[i] + 1);
+        else
+            printf("Process %d -> Not Allocated\n", i + 1);
+    }
+}
+
+void worstFit(int blocks[], int b, int processes[], int p)
+{
+    int allocation[p];
+
+    for (int i = 0; i < p; i++)
+        allocation[i] = -1;
+
+    for (int i = 0; i < p; i++) {
+        int worst = -1;
+
+        for (int j = 0; j < b; j++) {
+            if (blocks[j] >= processes[i]) {
+                if (worst == -1 || blocks[j] > blocks[worst])
+                    worst = j;
+            }
+        }
+
+        if (worst != -1) {
+            allocation[i] = worst;
+            blocks[worst] -= processes[i];
+        }
+    }
+
+    printf("\nWorst Fit:\n");
+    for (int i = 0; i < p; i++) {
+        if (allocation[i] != -1)
+            printf("Process %d -> Block %d\n", i + 1, allocation[i] + 1);
+        else
+            printf("Process %d -> Not Allocated\n", i + 1);
+    }
+}
+
+int main()
+{
+    int b, p;
+
+    printf("Enter number of memory blocks: ");
+    scanf("%d", &b);
+
+    int blocks[b];
+
+    printf("Enter memory block sizes:\n");
+    for (int i = 0; i < b; i++)
+        scanf("%d", &blocks[i]);
+
+    printf("Enter number of processes: ");
+    scanf("%d", &p);
+
+    int processes[p];
+
+    printf("Enter process sizes:\n");
+    for (int i = 0; i < p; i++)
+        scanf("%d", &processes[i]);
+
+    int b1[b], b2[b], b3[b];
+
+    for (int i = 0; i < b; i++) {
+        b1[i] = blocks[i];
+        b2[i] = blocks[i];
+        b3[i] = blocks[i];
+    }
+
+    firstFit(b1, b, processes, p);
+    bestFit(b2, b, processes, p);
+    worstFit(b3, b, processes, p);
+
+    return 0;
+}
