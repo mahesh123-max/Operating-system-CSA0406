@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+int main()
+{
+    int n, block;
+
+    printf("Enter number of file blocks: ");
+    scanf("%d", &n);
+
+    int index[n];
+    int data[n];
+
+    printf("Enter data for each block:\n");
+
+    for (int i = 0; i < n; i++) {
+        index[i] = i + 1;
+
+        printf("Block %d: ", i + 1);
+        scanf("%d", &data[i]);
+    }
+
+    printf("\nIndex Block:\n");
+
+    for (int i = 0; i < n; i++) {
+        printf("Index[%d] -> Block %d\n",
+               i + 1, index[i]);
+    }
+
+    printf("\nEnter block number to access: ");
+    scanf("%d", &block);
+
+    if (block < 1 || block > n) {
+        printf("Invalid block number.\n");
+        return 1;
+    }
+
+    printf("\nIndex[%d] points to Block %d\n",
+           block, index[block - 1]);
+
+    printf("Data in Block %d = %d\n",
+           block, data[index[block - 1] - 1]);
+
+    return 0;
+}
